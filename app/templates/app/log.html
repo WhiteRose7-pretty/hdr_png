@@ -1,0 +1,239 @@
+{% spaceless %}
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <title>Ericsson-KPI Dashboard.</title>
+        <!-- Preloader -->
+
+        <script>
+            window.addEventListener("load", function () {
+                setTimeout(function () {
+                    document.querySelector('body').classList.add('loaded');
+                }, 300);
+            });
+        </script>
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'assets/img/brand/favicon.ico' %}" type="image/png">
+        <!-- Page CSS -->
+        <link rel="stylesheet" href="{% static 'assets/libs/@fancyapps/fancybox/dist/jquery.fancybox.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/libs/bootstrap/dist/css/bootstrap.min.css' %}"/>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'assets/libs/@fortawesome/fontawesome-free/css/all.min.css' %}">
+        <!-- Autocompleted -->
+        <link rel="stylesheet" href="{% static 'assets/libs/autocomplete/dist/css/jquery-ui.css' %}">
+        <!-- Calendar-->
+        <link rel="stylesheet" href="{% static 'assets/libs/flatpickr/dist/flatpickr.min.css' %}">
+        <!-- Quick CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/quick-website.css' %}" id="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'assets/libs/sweetalert2/dist/sweetalert2.min.css' %}">
+
+        <!-- Chart Lib -->
+        <link href="{% static 'assets/libs/nvd3/nv.d3.min.css' %}" rel="stylesheet" type="text/css">
+        <script src="{% static 'assets/libs/nvd3/d3.min.js' %}" charset="utf-8"></script>
+        <script src="{% static 'assets/libs/nvd3/nv.d3.min.js' %}"></script>
+        <script src="{% static 'assets/libs/nvd3/stream_layers.js' %}"></script>
+
+
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/gh/Dogfalo/materialize@master/extras/noUiSlider/nouislider.css">
+        <link rel="stylesheet"
+              href="https://gist.githubusercontent.com/alexventuraio/4d0c725c34941fa42361350dcb43731f/raw/9364364f491288ffa1c1efbe796a44e07c16908d/sponsor.matchxperience.css">
+        <!-- Custom Css -->
+
+
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/libs/datatable/jquery.dataTables.css' %}"/>
+
+        <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+
+    </head>
+
+    <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner-border text" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-cookies" data-backdrop="true"
+         aria-labelledby="modal-cookies" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-aside left-4 right-4 bottom-4">
+            <div class="modal-content bg-dark-dark">
+                <div class="modal-body">
+                    <!-- Text -->
+                    <p class="text-sm text-white mb-3">
+                        Just like many websites, Ericsson uses cookies and related technologies to improve the way our
+                        site functions for visitors.
+                        It is up to you whether to accept cookies. If you want to opt out (that is, not allow cookies)
+                        at any time,
+                        all you need to do is update your settings. </p>
+
+                    <!-- Buttons -->
+                    <a href="" class="btn btn-sm btn-white" target="_blank">Learn more</a>
+                    <button type="button" class="btn btn-sm btn-primary mr-2" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="" id="header-main">
+
+        <nav class="navbar navbar-main navbar-expand-lg navbar-light" id="navbar-main">
+            {% include "app/basic/navbar.html" %}
+        </nav>
+    </header>
+
+
+
+    <!-- Core JS  -->
+    <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/libs/svg-injector/dist/svg-injector.min.js' %}"></script>
+    <script src="{% static 'assets/libs/feather-icons/dist/feather.min.js' %}"></script>
+    <!-- Optional JS -->
+    <script src="{% static 'assets/libs/in-view/dist/in-view.min.js' %}"></script>
+    <script src="{% static 'assets/libs/sticky-kit/dist/sticky-kit.min.js' %}"></script>
+    <script src="{% static 'assets/libs/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <!-- Page JS -->
+    <script src="{% static 'assets/libs/@fancyapps/fancybox/dist/jquery.fancybox.min.js' %}"></script>
+    <!-- Autocompleted -->
+    <script src="{% static 'assets/libs/autocomplete/dist/js/jquery-ui-1.12.1/jquery-ui.js' %}"></script>
+    <!-- Input mask -->
+    <script src="{% static 'assets/libs/jquery-mask-plugin/dist/jquery.mask.min.js' %}"></script>
+    <!-- Calendar -->
+    <script src="{% static 'assets/libs/flatpickr/dist/flatpickr.min.js' %}"></script>
+    <!-- Quick JS -->
+    <script src="{% static 'assets/js/quick-website.js' %}"></script>
+    <script src="{% static 'assets/libs/form/jquery.form.js' %}"></script>
+
+
+    <script src="{% static 'assets/libs/sweetalert2/dist/sweetalert2.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Dogfalo/materialize@master/extras/noUiSlider/nouislider.min.js"></script>
+
+    <script src="{% static 'assets/libs/datatable/jquery.dataTables.js' %}"></script>
+
+    <!-- Feather Icons -->
+    <script>
+        feather.replace({
+            'width': '1em',
+            'height': '1em'
+        })
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            table_update();
+
+            $(".menu_last > li").mouseover(function () {
+                $(this).siblings(".iconf").addClass('hovering')
+            });
+            $(".menu_last > li").mouseout(function () {
+                $(this).siblings(".iconf").removeClass('hovering')
+            });
+
+            $(".dataTables_info").addClass('text-light');
+
+        });
+
+        $(document).on('click', '#show-raw', function () {
+            console.log('clicked log data');
+            $('.raw-display').toggle();
+        })
+
+        function table_update() {
+                        $('#table').DataTable({
+                searching: false,
+                paging: false,
+                info: false,
+            });
+
+            $('#table_length select').addClass('form-control form-control-emphasized');
+            $("#table_filter > label").addClass('asd');
+            $(".three").addClass("active");
+            $('.paginate_button:not(.current)').attr("style", "color: #d2cdcd !important;");
+            $('thead').removeClass('btn-primary');
+            $('table').removeClass('table-bordered');
+            $('table').addClass('text-light');
+
+        }
+
+    </script>
+    <script>
+
+        function menu() {
+            $(".menu_last").toggle("fast")
+        }
+
+        function download_csv() {
+            let mode = $('.form-check-input:checked').val();
+            var encodedUri;
+            switch (mode) {
+                case 'daily':
+                    encodedUri = encodeURI(daily_data_chart_csv);
+                    break;
+                case 'weekly':
+                    encodedUri = encodeURI(daily_data_chart_csv_weekly);
+                    break;
+                case 'monthly':
+                    encodedUri = encodeURI(daily_data_chart_csv_monthly);
+                    break;
+            }
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "my_data.csv");
+            document.body.appendChild(link); // Required for FF
+            link.click(); // This will download the data file named "my_data.csv".
+        }
+
+        function onSubmitForm(event) {
+            $('#table-container').css('display', 'none');
+            $('#form-loading').css('display', 'flex');
+            event.preventDefault();
+            $.ajax(
+                {
+                    url: '',
+                    headers: {
+                        "X-CSRFToken": '{{ csrf_token }}'
+                    },
+                    type: 'post',
+                    data: {
+                        'msisdn': $('#id_msisdn').val(),
+                        'method': $('#id_method').val(),
+                        'position_method': $('#id_position_method').val(),
+                        'distance': $('#id_distance').val(),
+                    },
+                    success: (response) => {
+                        if (response == "error") {
+                            alert('error happened');
+                        } else {
+                            $('#table-container').html(response);
+                            table_update();
+                        }
+
+                        $('#table-container').css('display', 'block');
+                        $('#form-loading').css('display', 'none');
+                    },
+                    error: (error) => {
+                        $('#table-container').css('display', 'block');
+                        $('#form-loading').css('display', 'none');
+                        alert(error)
+                    }
+                }
+            )
+
+        }
+
+
+    </script>
+
+    </body>
+
+    </html>
+{% endspaceless %}

@@ -1,0 +1,57 @@
+<table id="table" class="table table-bordered mt-4">
+    <thead class="btn-primary">
+    <tr>
+        <th>IMSI</th>
+        <th>TIMESTAMP</th>
+        <th>ACCURACY</th>
+        <th>LAT.</th>
+        <th>LONG</th>
+        <th>POSITION METHOD</th>
+        <th>CONFIDENCE</th>
+        <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if data %}
+        <tr>
+            <th>
+                {{ data.imsi }}
+            </th>
+            <th>
+                {{ data.timestamp }}
+            </th>
+            <th>
+                {{ data.accuracy }}
+            </th>
+            <th>
+                {{ data.lat }}
+            </th>
+            <th>
+                {{ data.long }}
+            </th>
+            <th>
+                {{ data.pos_method }}
+            </th>
+            <th>
+                {{ data.confidence }}
+            </th>
+            <th>
+                {% if data.pass_v == "PASS" %}
+                    <span class="text-success">{{ data.pass_v }}</span>
+                {% else %}
+                    <span class="text-danger">{{ data.pass_v }}</span>
+                {% endif %}
+            </th>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
+<div class="mt-3 raw-display" style="display: none">
+    {% if data %}
+
+        <h4 class="d-none">Request:</h4>
+        <p class="d-none" style="color: whitesmoke;">{{ data.request_string }}</p>
+        <h4 class="mt-2">Response:</h4>
+        <p style="color: whitesmoke">{{ data.response_string }}</p>
+    {% endif %}
+</div>

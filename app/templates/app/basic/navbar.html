@@ -1,0 +1,95 @@
+{% load static %}
+<div class="container-fluid">
+
+
+    <!-- smal brand -->
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse"
+            aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse navbar-collapse-overlay" id="navbar-main-collapse">
+        <!-- Toggler -->
+        <div class="position-relative">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse"
+                    aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+
+
+        <ul class="navbar-nav ul-s d-lg-flex align-items-center">
+            <li class="nav-item nav-item-spaced">
+                <a class="nav-link mr-5 three" href=#">
+                    Location Trigger
+                </a>
+            </li>
+
+
+            <!-- Auth -->
+            {% if user.is_authenticated %}
+                <li class="nav-item x-lefted menu">
+                    <span class='user_name'>{{ request.user.username }}</span>
+
+                    <div class="roundedx">
+                        {% if request.user.profile_picture %}
+                            <img class='avatr' src="{{ request.user.profile_picture.url }}" draggable="false">
+                        {% else %}
+                            <img class='avatr' src="{% static 'assets/img/clients/avatar.jpeg' %}" draggable="false">
+                        {% endif %}
+                    </div>
+                    <i class="fas fa-sign-out-alt" onclick="document.location.href='/accounts/logout/';"></i>
+                </li>
+
+            {% else %}
+                <li class="nav-item">
+                    <a href="#" class="btn btn-sm btn-primary ml-0">
+                        <span>Login</span>
+                        <span><i class="far fa-user-circle ml-2"></i></span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+
+        </div>
+
+
+</div>
+<style>
+
+    body::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background-color: #2C2C2E;
+    }
+
+    body::-webkit-scrollbar {
+        width: 12px;
+        background-color: #2C2C2E;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: rgb(116, 114, 114);
+    }
+
+    .nav-link:not(.active) {
+        color: whitesmoke !important;
+    }
+
+    .nav-link:not(.active):hover {
+        color: #30b1ff !important;
+    }
+
+    .nav-link.active {
+        border-bottom: 1px solid #30b1ff;
+    }
+
+    .nav-link.active {
+        color: #30b1ff !important;
+    }
+
+
+</style>
