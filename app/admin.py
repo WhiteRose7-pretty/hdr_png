@@ -4,4 +4,7 @@ from django.utils.html import escape
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
+from .models import *
 
+
+admin.site.register(HDRImage)

@@ -1,19 +1,37 @@
-import datetime
 import json
-from django.core import serializers
 from django.shortcuts import render
-from django.db.models.functions import TruncMonth, TruncDay, TruncWeek, TruncHour
-from django.db.models import Count, Avg
-from decimal import Decimal
-from django.utils.dateformat import format
-from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.http import JsonResponse
 import os
-import requests
-from django.template.loader import render_to_string
+import base64
+from django.core.files.base import ContentFile
+from .engine import convert_hdr
+from .models import *
+from django.views.decorators.csrf import csrf_exempt
+
 
 def home(request):
-
     return render(request, 'app/log.html')
+
+
+@csrf_exempt
+def convert_hdr_to_png(request):
+    data = json.loads(request.body)
+    b64_string = data['image']
+    file_name = data['file']
+    data = ContentFile(base64.b64decode(b64_string), file_name)
+    hdr = HDRImage.objects.create(file=data)
+    hdr.save()
+    os.chmod(hdr.file.path, 0o0774)
+    png_path = convert_hdr(hdr.file.path)
+    hdr.png_file.name = png_path
+    hdr.save()
+
+    with open(png_path, "rb") as png_file:
+        b64_string = base64.b64encode(png_file.read()).decode('utf-8')
+
+    json_response = {
+        "file_name": file_name.split('.')[0] + '.png',
+        "b64_string": b64_string,
+    }
+
+    return JsonResponse(json_response, safe=True)
